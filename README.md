@@ -27,8 +27,6 @@ You need install the following packages to run this project just type and execut
 
         python server.py
         
-![server.py](https://photos.google.com/search/_tra_/photo/AF1QipN0LauI3Vi5LfnK1zJrkEOTfAvw7vukpeGLDqsV)
-
 By default, flask will run on port 5000. 
 
 Worth noting that when run the project, the ground truth (correct) target values of the first 100 numbers is created (**"fist100FizzBuzz_ground_truth.csv"**) to the evaluate the classifiers.
@@ -38,8 +36,6 @@ Worth noting that when run the project, the ground truth (correct) target values
 On hitting the URL from your browser you should be able to view the homepage with the names of the routes to use. 
 
 In the first project run, we must execute the routes in this order to create the files for the machine learning model.  The data samples files are **.csv** files, the classifiers are **.pkl** files.
-
-![home page](https://photos.google.com/photo/AF1QipPASUy7yJn9dm2UgQYEUmSJKiZLyA5nsgHs06ps)
 
 We should create the sample data set (route **"/generate"**). Then train/evaluate the model (route **"/train"**) and finally classify (route **/predict** ) the numbers in the range [1-100].
 
