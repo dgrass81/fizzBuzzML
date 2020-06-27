@@ -3,16 +3,15 @@ from sklearn.metrics import classification_report, precision_score, recall_score
 from fizzBuzzDataPrep import *
 
 
-
 def predict_range_number(filename, num_from, num_to):
-    if (num_from < num_to) and (num_from >= 1 and num_to <=100):
+    if (num_from < num_to) and (num_from >= 1 and num_to <= 100):
         load_model_lr = joblib.load(filename)
         # select the range [1:100] Ground Truth
         df = pd.read_csv('fist100FizzBuzz_ground_truth.csv')
-        y_target = np.array(df['Class'])[num_from-1:num_to]
+        y_target = np.array(df['Class'])[num_from - 1:num_to]
         preds = []
         result = ""
-        for i in range(num_from, num_to+1):
+        for i in range(num_from, num_to + 1):
             predict = load_model_lr.predict([factors_prime_encode(i)])
             preds.append(predict[0])
             if switch_fizz_buzz(predict[0]) == "None":
@@ -25,19 +24,20 @@ def predict_range_number(filename, num_from, num_to):
 
 def train_evaluate_model(filename):
     df = pd.read_csv(filename)
-    print("example of first samples")
+    print("example of first sample data set")
     print(df.head())
     print("-----------------------------------------")
     print(df.groupby('Class').size())
 
     data = np.array(df.drop(['Class'], 1))
     target = np.array(df['Class'])
-    print("------------ number of samples generated ----------------")
+    print("------------ number of generated sample data set  ----------------")
 
     model_lr = create_model()
 
     validation_size = 0.20
     seed = 7
+    # training set, testing set
     x_train, x_validation, y_train, y_validation = model_selection.train_test_split(data, target,
                                                                                     test_size=validation_size,
                                                                                     random_state=seed,
@@ -52,12 +52,11 @@ def train_evaluate_model(filename):
     save_object(classif_name, model_lr)
 
     print("------------ classification report ----------------")
-    print(classification_report(y_validation,preds))
+    print(classification_report(y_validation, preds))
     return cross_validation_scores, \
            cross_validation_scores.mean(), \
-           accuracy_score(y_validation, preds),\
+           accuracy_score(y_validation, preds), \
            precision_score(y_validation, preds, average='micro'), \
            recall_score(y_validation, preds, average='micro'), \
            f1_score(y_validation, preds, average='micro'), \
            classif_name
-

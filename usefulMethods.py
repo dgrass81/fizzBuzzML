@@ -2,6 +2,7 @@ import joblib
 from sklearn import linear_model
 from sympy.ntheory import primefactors as pf
 
+
 def switch_index_encode(argument):
     switcher = {
         2: 0,
@@ -11,7 +12,8 @@ def switch_index_encode(argument):
         11: 4,
         13: 5
     }
-    return (switcher.get(argument, -1))
+    return switcher.get(argument, -1)
+
 
 def factors_prime_encode(number):
     factors_x = pf(number)
@@ -26,12 +28,12 @@ def factors_prime_encode(number):
 def fizzbuzz(i):
     if i % 15 == 0:
         return 1
-    elif i % 5 == 0:
+    if i % 5 == 0:
         return 2
-    elif i % 3 == 0:
+    if i % 3 == 0:
         return 3
-    else:
-        return 4
+    return 4
+
 
 def switch_fizz_buzz(argument):
     switcher = {
@@ -40,17 +42,19 @@ def switch_fizz_buzz(argument):
         2: "Buzz",
         1: "FizzBuzz"
     }
-    return (switcher.get(argument, -1))
+    return switcher.get(argument, -1)
+
 
 def save_object(filename, model):
-    with open(''+filename, 'wb') as file:
+    with open('' + filename, 'wb') as file:
         joblib.dump(model, filename)
 
 
 def load_object(filename):
-    with open(''+filename ,'rb') as f:
+    with open('' + filename, 'rb') as f:
         loaded = joblib.load(f)
     return loaded
+
 
 def create_model():
     model_lR = linear_model.LogisticRegression(
@@ -64,4 +68,3 @@ def create_model():
         verbose=0,
         warm_start=False)
     return model_lR
-

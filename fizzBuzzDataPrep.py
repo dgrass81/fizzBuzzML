@@ -11,6 +11,7 @@ def generate_data_sample(sample_size):
     return df
 
 
+# The ground truth (correct) target values of the first 100 numbers
 def generate_first100_fizz_buzz():
     sample_fizz_buzz = np.array([factors_prime_encode(i) for i in range(1, 100 + 1)])
     target_fizz_buzz = np.array([[fizzbuzz(i)] for i in range(1, 100 + 1)])
